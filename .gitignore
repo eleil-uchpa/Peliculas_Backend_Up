@@ -37,3 +37,4 @@ out/
 
 # Application local override (opcional)
 application-local.properties
+application-dev.properties
