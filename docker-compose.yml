@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Base de datos (PostgreSQL)
+  postgres-db:
+    image: postgres:15
+    container_name: postgres_tarea_final
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: tareaFinal
+    ports:
+      - "5433:5432" # Puerto externo 5433 para tu Spring Boot
+    volumes:
+      - postgres_data_tarea:/var/lib/postgresql/data
+
+  # Interfaz gráfica (pgAdmin 4)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_tarea_final
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com  # Usuario para entrar a pgAdmin web
+      PGADMIN_DEFAULT_PASSWORD: admin         # Contraseña para entrar a pgAdmin web
+    ports:
+      - "5051:80"   # Puerto externo 5051 (para evitar conflicto con el 5050)
+    depends_on:
+      - postgres-db
+
+volumes:
+  postgres_data_tarea:

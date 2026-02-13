@@ -1,0 +1,39 @@
+### Maven ###
+target/
+
+### IDEs ###
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Logs ###
+logs/
+*.log
+
+### Environment ###
+
+
+### Temp ###
+bin/
+out/
+*.tmp
+*.swp
+*.bak
+
+# Maven wrapper jar (opcional pero recomendado)
+.mvn/wrapper/maven-wrapper.jar
+
+# Environment files
+.env
+
+# Application local override (opcional)
+application-local.properties
