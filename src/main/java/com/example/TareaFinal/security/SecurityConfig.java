@@ -57,7 +57,7 @@ public class SecurityConfig {
                                 "/api/v1/rate/get",
                                 "/swagger-resources/**",
                                 "/webjars/**").permitAll()
-                        .requestMatchers("api/v1/rate/deleteAdmin","/api/v1/rate/findAll","/api/v1/usuario/save","/api/v1/usuario/findAll", "/api/v1/pelicula/find")
+                        .requestMatchers("api/v1/rate/deleteAdmin","api/v1/rate/findAll","/api/v1/usuario/save","/api/v1/usuario/findAll", "/api/v1/pelicula/find")
                         .hasAnyAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
