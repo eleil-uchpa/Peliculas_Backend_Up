@@ -28,27 +28,49 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
 
-
-        String authHeader = request.getHeader("Authorization");
-        if(StringUtils.isEmpty(authHeader) || !StringUtils.startsWithIgnoreCase(authHeader, "Bearer ")) {
+        // 🔥 IMPORTANTE: permitir preflight CORS
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             filterChain.doFilter(request, response);
             return;
         }
+
+        String authHeader = request.getHeader("Authorization");
+
+        if (StringUtils.isEmpty(authHeader) ||
+                !StringUtils.startsWithIgnoreCase(authHeader, "Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String jwt = authHeader.substring(7);
         String username = jwtService.extractUsername(jwt);
 
-        if(Objects.nonNull(username) && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetaisService.loadUserByUsername(username);
+        if (Objects.nonNull(username) &&
+                SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            UserDetails userDetails =
+                    userDetaisService.loadUserByUsername(username);
+
             if (jwtService.validateToken(jwt, userDetails)) {
-                SecurityContext securityContext = SecurityContextHolder.getContext();
+
                 UsernamePasswordAuthenticationToken auth =
-                        new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
-                securityContext.setAuthentication(auth);
-                SecurityContextHolder.setContext(securityContext);
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities()
+                        );
+
+                SecurityContextHolder.getContext()
+                        .setAuthentication(auth);
             }
         }
+
         filterChain.doFilter(request, response);
     }
 }
