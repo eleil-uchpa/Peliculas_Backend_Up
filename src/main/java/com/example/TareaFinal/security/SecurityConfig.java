@@ -50,14 +50,14 @@ public class SecurityConfig {
                                 "/api/v1/categorias/**",
                                 "/api/v1/usuario/delete",
                                 "/api/v1/usuario/findAllRate",
-                                "api/v1/rate/delete",
+                                "/api/v1/rate/delete",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/api/v1/rate/save",
                                 "/api/v1/rate/get",
                                 "/swagger-resources/**",
                                 "/webjars/**").permitAll()
-                        .requestMatchers("api/v1/rate/deleteAdmin","api/v1/rate/findAll","/api/v1/usuario/save","/api/v1/usuario/findAll", "/api/v1/pelicula/find")
+                        .requestMatchers("/api/v1/rate/deleteAdmin","/api/v1/rate/findAll","/api/v1/usuario/save","/api/v1/usuario/findAll", "/api/v1/pelicula/find")
                         .hasAnyAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
