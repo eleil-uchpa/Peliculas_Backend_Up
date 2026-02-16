@@ -74,7 +74,8 @@ public class SecurityConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://proyect-movie-crud.vercel.app"
+                "https://proyect-movie-crud.vercel.app",
+                "https://proyect-movie-crud-git-feature-8096f3-eleils-projects-023b9785.vercel.app"
         ));
 
         configuration.setAllowedMethods(List.of("*"));
