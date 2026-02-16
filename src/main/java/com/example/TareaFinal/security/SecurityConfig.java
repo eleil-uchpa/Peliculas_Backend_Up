@@ -50,7 +50,7 @@ public class SecurityConfig {
                                 "/api/v1/pelicula/detail",
                                 "/api/v1/categorias/**",
                                 "/api/v1/usuario/delete",
-                                "/api/v1/usuario/findAllRate",
+                                "/api/v1/pelicula/findAllRate",
                                 "/api/v1/rate/delete",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
